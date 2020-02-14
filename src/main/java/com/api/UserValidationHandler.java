@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserHandler {
+public class UserValidationHandler {
     public static boolean userExists(String username) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if (connection == null)
