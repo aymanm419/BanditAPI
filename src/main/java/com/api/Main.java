@@ -51,7 +51,7 @@ public class Main {
             raw.getOutputStream().close();
             return response.raw();
         });
-        get("/users/finduser","application/json", (request, response) ->
+        get("/users/find","application/json", (request, response) ->
         {
             try {
                 if (UserHandler.userExists(request.queryParams("username")))
@@ -62,7 +62,7 @@ public class Main {
                 return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Connection to database could not be Initiated"));
             }
         });
-        post("/users/createaccount", "application/json", (request, response) ->
+        post("/users/create", "application/json", (request, response) ->
         {
             String username = request.queryParams("username");
             String password = request.queryParams("password");
