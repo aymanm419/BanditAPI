@@ -1,4 +1,4 @@
-package com.api;
+package com.api.Response;
 
 import com.google.gson.JsonElement;
 import lombok.Data;

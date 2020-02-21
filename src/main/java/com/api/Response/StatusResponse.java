@@ -1,4 +1,4 @@
-package com.api;
+package com.api.Response;
 
 import lombok.Getter;
 import lombok.Setter;

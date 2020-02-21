@@ -3,9 +3,6 @@ package com.api.Repository;
 import com.api.Database.DatabaseConnection;
 import com.api.Model.Post;
 import com.api.Model.Song;
-import com.api.StandardResponse;
-import com.api.StatusResponse;
-import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

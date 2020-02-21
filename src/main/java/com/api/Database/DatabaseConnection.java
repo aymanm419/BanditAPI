@@ -19,7 +19,6 @@ public class DatabaseConnection {
             databaseConnection = new DatabaseConnection();
         return databaseConnection;
     }
-
     public Connection getConnection() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         if (connectionsPool.isEmpty()) {
             DatabaseConnectionCreator databaseConnectionCreator = new DatabaseConnectionCreator();

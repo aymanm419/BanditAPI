@@ -1,4 +1,4 @@
-package com.api;
+package com.api.User;
 
 import com.api.Database.DatabaseConnection;
 
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserValidationHandler {
+public class UserValidation {
     public static boolean userExists(String username) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if (connection == null)
