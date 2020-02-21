@@ -16,7 +16,7 @@ import static com.api.Main.gson;
 public class UserActionResponse {
     public static final RequestValidation requestValidation = new RequestValidation();
 
-    public static String changeLikePost(Request request, Response response) {
+    public static String changePostLike(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
@@ -40,7 +40,7 @@ public class UserActionResponse {
         }
     }
 
-    public static String changeDislikePost(Request request, Response response) {
+    public static String changePostDislike(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
@@ -64,7 +64,7 @@ public class UserActionResponse {
         }
     }
 
-    public static String changeFavouritePost(Request request, Response response) {
+    public static String changePostFavourite(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));

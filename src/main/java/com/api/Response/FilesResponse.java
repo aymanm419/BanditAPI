@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import static com.api.Main.gson;
 
 public class FilesResponse {
-    public static String transferFile(Request request, Response response) {
+    public static String transferFileToUser(Request request, Response response) {
 
         try {
             byte[] bytes = Files.readAllBytes(java.nio.file.Paths.get("C:\\FTPServer\\" + request.queryParams("dir")));
