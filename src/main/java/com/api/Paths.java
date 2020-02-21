@@ -14,6 +14,5 @@ public class Paths {
     public static final String USER_ACTION_LIKE = "/user/action/like";
     public static final String USER_ACTION_DISLIKE = "/user/action/dislike";
     public static final String USER_ACTION_FAVOURITE = "/user/action/favourite";
-    public static final String USER_ACTION = "/users/:username/action/:action";
 
 }
