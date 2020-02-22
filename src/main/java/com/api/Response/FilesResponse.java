@@ -1,5 +1,6 @@
 package com.api.Response;
 
+import com.google.gson.JsonPrimitive;
 import spark.Request;
 import spark.Response;
 
@@ -21,7 +22,7 @@ public class FilesResponse {
             raw.getOutputStream().write(bytes);
             raw.getOutputStream().flush();
             raw.getOutputStream().close();
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(response.raw())));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("File sent successfully")));
         } catch (IOException e) {
             e.printStackTrace();
             response.header("Content-Type", "application/download");
