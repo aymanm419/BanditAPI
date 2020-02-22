@@ -2,6 +2,7 @@ package com.api.Response;
 
 import com.api.User.UserData;
 import com.api.User.UserValidation;
+import com.google.gson.JsonPrimitive;
 import spark.Request;
 import spark.Response;
 
@@ -15,7 +16,7 @@ public class UserDataResponse {
         try {
             if (!UserValidation.userExists(username))
                 return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Username does not exist."));
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(UserData.getID(username))));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive(UserData.getID(username))));
         } catch (InstantiationException | SQLException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
@@ -23,11 +24,9 @@ public class UserDataResponse {
     }
 
     public static String getUserLikes(Request request, Response response) {
-        String username = request.queryParams("username");
+        int userID = Integer.parseInt(request.queryParams("userID"));
         try {
-            if (!UserValidation.userExists(username))
-                return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Username does not exist."));
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(UserData.getLikes(username))));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJsonTree(UserData.getLikes(userID))));
         } catch (InstantiationException | SQLException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
@@ -35,11 +34,9 @@ public class UserDataResponse {
     }
 
     public static String getUserDislikes(Request request, Response response) {
-        String username = request.queryParams("username");
+        int userID = Integer.parseInt(request.queryParams("userID"));
         try {
-            if (!UserValidation.userExists(username))
-                return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Username does not exist."));
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(UserData.getDislikes(username))));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJsonTree(UserData.getDislikes(userID))));
         } catch (InstantiationException | SQLException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
@@ -47,11 +44,9 @@ public class UserDataResponse {
     }
 
     public static String getUserFavourites(Request request, Response response) {
-        String username = request.queryParams("username");
+        int userID = Integer.parseInt(request.queryParams("userID"));
         try {
-            if (!UserValidation.userExists(username))
-                return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Username does not exist."));
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(UserData.getFavourites(username))));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJsonTree(UserData.getFavourites(userID))));
         } catch (InstantiationException | SQLException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));

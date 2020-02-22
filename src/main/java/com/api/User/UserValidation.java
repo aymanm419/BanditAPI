@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserValidation {
-    public static boolean userExists(String username) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static boolean userExists(String userName) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if (connection == null)
             throw new SQLException("Could not connect to database");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from accounts where username='" + username + "'");
+        ResultSet resultSet = statement.executeQuery("select * from accounts where username='" + userName + "'");
         boolean success = resultSet.next();
         resultSet.close();
         DatabaseConnection.getInstance().releaseConnection(connection);

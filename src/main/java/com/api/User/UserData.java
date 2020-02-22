@@ -23,13 +23,13 @@ public class UserData {
         throw new RuntimeException("User ID was not found");
     }
 
-    public static List<Integer> getLikes(String userName) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static List<Integer> getLikes(int userID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         Connection connection = databaseConnection.getConnection();
         if (connection == null)
             throw new SQLException("Could not make connection to DB");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from likes where username = " + "'" + userName + "'");
+        ResultSet resultSet = statement.executeQuery("select * from likes where userID = " + "'" + userID + "'");
         List<Integer> likes = new ArrayList<>();
         while (resultSet.next())
             likes.add(resultSet.getInt("postID"));
@@ -37,26 +37,26 @@ public class UserData {
 
     }
 
-    public static List<Integer> getDislikes(String userName) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static List<Integer> getDislikes(int userID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         Connection connection = databaseConnection.getConnection();
         if (connection == null)
             throw new SQLException("Could not make connection to DB");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from dislikes where ID = " + userName);
+        ResultSet resultSet = statement.executeQuery("select * from dislikes where userID = " + userID);
         List<Integer> dislikes = new ArrayList<>();
         while (resultSet.next())
             dislikes.add(resultSet.getInt("postID"));
         return dislikes;
     }
 
-    public static List<Integer> getFavourites(String userName) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static List<Integer> getFavourites(int userID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         Connection connection = databaseConnection.getConnection();
         if (connection == null)
             throw new SQLException("Could not make connection to DB");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from favourites where ID = " + userName);
+        ResultSet resultSet = statement.executeQuery("select * from favourites where userID = " + userID);
         List<Integer> favourites = new ArrayList<>();
         while (resultSet.next())
             favourites.add(resultSet.getInt("postID"));

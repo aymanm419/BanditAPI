@@ -24,6 +24,7 @@ public class FilesResponse {
             return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, gson.toJson(response.raw())));
         } catch (IOException e) {
             e.printStackTrace();
+            response.header("Content-Type", "application/download");
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.toString()));
         }
     }

@@ -1,14 +1,12 @@
 package com.api.Response;
 
-import com.api.Database.DatabaseConnection;
 import com.api.Request.RequestValidation;
-import com.api.User.UserData;
+import com.api.User.UserAction;
+import com.google.gson.JsonPrimitive;
 import spark.Request;
 import spark.Response;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Set;
 
 import static com.api.Main.gson;
@@ -20,23 +18,15 @@ public class UserActionResponse {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        String postID = request.params("post");
-        String userName = request.params("username");
+        int postID = Integer.parseInt(request.params("postID"));
+        int userID = Integer.parseInt(request.params("userID"));
         int change = Integer.parseInt(request.params("change"));
-        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         try {
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            statement.execute("UPDATE posts SET " + "post_upvote" + " = " + "post_upvote" + " + " + change + " WHERE post_id = " + postID + ";");
-            if (change == 1)
-                statement.execute("INSERT INTO " + "likes" + " VALUES (" + UserData.getID(userName) + "," + postID + ");");
-            else
-                statement.execute("DELETE FROM " + "likes" + " WHERE ID = " + UserData.getID(userName) + " AND postID = " + postID + ";");
-            DatabaseConnection.getInstance().releaseConnection(connection);
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS));
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            UserAction.changePostLike(userID, postID, change);
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
-            return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, e.getMessage()));
         }
     }
 
@@ -44,23 +34,15 @@ public class UserActionResponse {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        String postID = request.params("post");
-        String userName = request.params("username");
+        int postID = Integer.parseInt(request.params("postID"));
+        int userID = Integer.parseInt(request.params("userID"));
         int change = Integer.parseInt(request.params("change"));
-        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         try {
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            statement.execute("UPDATE posts SET " + "post_downvote" + " = " + "post_downvote" + " + " + change + " WHERE post_id = " + postID + ";");
-            if (change == 1)
-                statement.execute("INSERT INTO " + "dislikes" + " VALUES (" + UserData.getID(userName) + "," + postID + ");");
-            else
-                statement.execute("DELETE FROM " + "dislikes" + " WHERE ID = " + UserData.getID(userName) + " AND postID = " + postID + ";");
-            DatabaseConnection.getInstance().releaseConnection(connection);
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS));
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            UserAction.changePostDislike(userID, postID, change);
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
-            return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, e.getMessage()));
         }
     }
 
@@ -68,22 +50,15 @@ public class UserActionResponse {
         Set<String> queryParams = request.queryParams();
         if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        String postID = request.params("post");
-        String userName = request.params("username");
+        int postID = Integer.parseInt(request.params("postID"));
+        int userID = Integer.parseInt(request.params("userID"));
         int change = Integer.parseInt(request.params("change"));
-        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         try {
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            if (change == 1)
-                statement.execute("INSERT INTO favourites VALUES(" + UserData.getID(userName) + " ," + postID + ")");
-            else
-                statement.execute("DELETE FROM favourites WHERE ID = " + UserData.getID(userName) + " AND postID = " + postID);
-            DatabaseConnection.getInstance().releaseConnection(connection);
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS));
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            UserAction.changePostFavourite(userID, postID, change);
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
-            return gson.toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, e.getMessage()));
         }
     }
 }

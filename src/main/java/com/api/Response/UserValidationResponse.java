@@ -1,6 +1,7 @@
 package com.api.Response;
 
 import com.api.User.UserValidation;
+import com.google.gson.JsonPrimitive;
 import spark.Request;
 import spark.Response;
 
@@ -14,7 +15,7 @@ public class UserValidationResponse {
         String password = request.queryParams("password");
         try {
             if (UserValidation.validateAccountCredentials(username, password))
-                return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, "User Authenticated successfully!"));
+                return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("User Authenticated successfully!")));
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Authentication Failed For user: " + username));
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
@@ -29,7 +30,7 @@ public class UserValidationResponse {
             if (UserValidation.userExists(username))
                 return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Username already exists"));
             UserValidation.createAccount(username, password);
-            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, "Successfully made account"));
+            return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Username was not found")));
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Connection to database could not be Initiated"));
@@ -39,7 +40,7 @@ public class UserValidationResponse {
     public static String findUser(Request request, Response response) {
         try {
             if (UserValidation.userExists(request.queryParams("username")))
-                return gson.toJson(new StandardResponse(StatusResponse.SUCCESS));
+                return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Username was found")));
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Could not find user with username: " + request.queryParams("username")));
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
