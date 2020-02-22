@@ -16,11 +16,11 @@ public class UserActionResponse {
 
     public static String changePostLike(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
-        if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
+        if (requestValidation.isParametersMissing(queryParams, "postID", "userID", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        int postID = Integer.parseInt(request.params("postID"));
-        int userID = Integer.parseInt(request.params("userID"));
-        int change = Integer.parseInt(request.params("change"));
+        int postID = Integer.parseInt(request.queryParams("postID"));
+        int userID = Integer.parseInt(request.queryParams("userID"));
+        int change = Integer.parseInt(request.queryParams("change"));
         try {
             UserAction.changePostLike(userID, postID, change);
             return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));
@@ -32,11 +32,11 @@ public class UserActionResponse {
 
     public static String changePostDislike(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
-        if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
+        if (requestValidation.isParametersMissing(queryParams, "postID", "userID", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        int postID = Integer.parseInt(request.params("postID"));
-        int userID = Integer.parseInt(request.params("userID"));
-        int change = Integer.parseInt(request.params("change"));
+        int postID = Integer.parseInt(request.queryParams("postID"));
+        int userID = Integer.parseInt(request.queryParams("userID"));
+        int change = Integer.parseInt(request.queryParams("change"));
         try {
             UserAction.changePostDislike(userID, postID, change);
             return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));
@@ -48,11 +48,11 @@ public class UserActionResponse {
 
     public static String changePostFavourite(Request request, Response response) {
         Set<String> queryParams = request.queryParams();
-        if (requestValidation.isParametersMissing(queryParams, "post", "username", "change"))
+        if (requestValidation.isParametersMissing(queryParams, "postID", "userID", "change"))
             return gson.toJson(new StandardResponse(StatusResponse.ERROR, "Invalid Request. Missing parameters"));
-        int postID = Integer.parseInt(request.params("postID"));
-        int userID = Integer.parseInt(request.params("userID"));
-        int change = Integer.parseInt(request.params("change"));
+        int postID = Integer.parseInt(request.queryParams("postID"));
+        int userID = Integer.parseInt(request.queryParams("userID"));
+        int change = Integer.parseInt(request.queryParams("change"));
         try {
             UserAction.changePostFavourite(userID, postID, change);
             return gson.toJson(new StandardResponse(StatusResponse.SUCCESS, new JsonPrimitive("Action done successfully!")));

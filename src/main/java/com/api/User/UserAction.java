@@ -15,7 +15,7 @@ public class UserAction {
         if (change == 1)
             statement.execute("INSERT INTO " + "likes" + " VALUES (" + userID + "," + postID + ");");
         else
-            statement.execute("DELETE FROM " + "likes" + " WHERE ID = " + userID + " AND postID = " + postID + ";");
+            statement.execute("DELETE FROM " + "likes" + " WHERE userID = " + userID + " AND postID = " + postID + ";");
         DatabaseConnection.getInstance().releaseConnection(connection);
         return true;
     }
@@ -28,7 +28,7 @@ public class UserAction {
         if (change == 1)
             statement.execute("INSERT INTO " + "dislikes" + " VALUES (" + userID + "," + postID + ");");
         else
-            statement.execute("DELETE FROM " + "dislikes" + " WHERE ID = " + userID + " AND postID = " + postID + ";");
+            statement.execute("DELETE FROM " + "dislikes" + " WHERE userID = " + userID + " AND postID = " + postID + ";");
         DatabaseConnection.getInstance().releaseConnection(connection);
         return true;
     }
@@ -40,7 +40,7 @@ public class UserAction {
         if (change == 1)
             statement.execute("INSERT INTO favourites VALUES(" + userID + " ," + postID + ")");
         else
-            statement.execute("DELETE FROM favourites WHERE ID = " + userID + " AND postID = " + postID);
+            statement.execute("DELETE FROM favourites WHERE userID = " + userID + " AND postID = " + postID);
         DatabaseConnection.getInstance().releaseConnection(connection);
         return true;
     }
