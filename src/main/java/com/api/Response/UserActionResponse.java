@@ -1,7 +1,7 @@
 package com.api.Response;
 
+import com.api.Repository.User.UserAction;
 import com.api.Request.RequestValidation;
-import com.api.User.UserAction;
 import com.google.gson.JsonPrimitive;
 import spark.Request;
 import spark.Response;

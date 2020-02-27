@@ -1,4 +1,4 @@
-package com.api.User;
+package com.api.Repository.User;
 
 import com.api.Database.DatabaseConnection;
 import com.api.Model.Post;
