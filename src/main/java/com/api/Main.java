@@ -10,7 +10,8 @@ public class Main {
 
     public static void main(String[] args) {
         port(6969);
-        get(Paths.POSTS_FILE, FilesResponse::transferFileToUser);
+        get(Paths.POSTS_IMAGE, FilesResponse::postImageResponse);
+        get(Paths.POSTS_SONG, FilesResponse::postAudioResponse);
         get(Paths.POSTS_HOT, "application/json", PostsResponse::getHotPosts);
         get(Paths.USER_FIND, "application/json", UserValidationResponse::findUser);
         post(Paths.USER_CREATE, "application/json", UserValidationResponse::createAccount);
@@ -22,5 +23,6 @@ public class Main {
         post(Paths.USER_ACTION_LIKE, "application/json", UserActionResponse::changePostLike);
         post(Paths.USER_ACTION_DISLIKE, "application/json", UserActionResponse::changePostDislike);
         post(Paths.USER_ACTION_FAVOURITE, "application/json", UserActionResponse::changePostFavourite);
+
     }
 }

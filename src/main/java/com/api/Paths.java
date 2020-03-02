@@ -3,7 +3,8 @@ package com.api;
 
 public class Paths {
     public static final String POSTS_HOT = "/post/hot";
-    public static final String POSTS_FILE = "/post/file";
+    public static final String POSTS_IMAGE = "/post/img";
+    public static final String POSTS_SONG = "/post/audio";
     public static final String USER_FIND = "/user/find";
     public static final String USER_CREATE = "/user/create";
     public static final String USER_LOGIN = "/user/login";
